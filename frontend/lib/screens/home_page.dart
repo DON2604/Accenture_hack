@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:farm_genius/widgets/carousal_slider.dart';
 import 'package:intl/intl.dart';
@@ -17,7 +16,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   double temperature = 16;
   double humidity = 60.0;
   String getCurrentDate() {
-    return DateFormat('dd MMMM yyyy').format(DateTime.now()); 
+    return DateFormat('dd MMMM yyyy').format(DateTime.now());
   }
 
   @override
@@ -29,121 +28,133 @@ class _DashboardScreenState extends State<DashboardScreen> {
           /// **1️⃣ Background Image (Farm)**
           Positioned.fill(
             child: Image.asset(
-              'assets/bg.png', 
+              'assets/asset1.png',
               fit: BoxFit.cover,
+              
             ),
           ),
 
           /// **2️⃣ UI Structure**
           Column(
             children: [
-              const SizedBox(height:2),
+              const SizedBox(height: 2),
               //location box
-              const SizedBox(height:100),
-              const SizedBox(height:5),
+              const SizedBox(height: 100),
+              const SizedBox(height: 5),
               Row(
                 children: [
                   Column(
                     children: [
-                      const Text("Hi,Good Morning.....",style:TextStyle(fontSize: 25)),
-                      Text("${temperature.toStringAsFixed(1)}°C",style:const TextStyle( fontSize: 75)),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 18),
+                        child: Text(
+                          "Hi,Good Morning.....",
+                          style: TextStyle(fontSize: 25, color: Color.fromARGB(255, 244, 241, 241)),
+                        ),
+                      ),
+                      Text(
+                        "16.0°C",
+                        style: const TextStyle(fontSize: 75,color: Color.fromARGB(255, 255, 255, 255), letterSpacing: -3.5,),
+                      ),
                       Row(
                         children: [
-                          const Icon(Icons.water_drop, color:Color.fromARGB(255, 154, 196, 230)),
+                          const Icon(Icons.water_drop,
+                              color: Color.fromARGB(255, 227, 229, 230)),
                           Text(
                             "${moisture.toStringAsFixed(1)}%",
-                            style:const TextStyle(fontWeight:FontWeight.bold,color: Colors.white), 
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
-                          const SizedBox(width:10),
+                          const SizedBox(width: 10),
                           Container(
-                            child:Row(
-                              children: [
-                              const Icon(Icons.air_rounded, color:Color.fromARGB(255, 154, 196, 230)),
-                          Text(
-                            "${humidity.toStringAsFixed(1)}%",
-                            style:const TextStyle(fontWeight:FontWeight.bold,color: Colors.white), 
-                          ),
-
-                            ],)
-                          ),
-                          
-
+                              child: Row(
+                            children: [
+                              const Icon(Icons.air_rounded,
+                                  color: Color.fromARGB(255, 154, 196, 230)),
+                              Text(
+                                "${humidity.toStringAsFixed(1)}%",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          )),
                         ],
                       )
                     ],
-
                   ),
-                  const SizedBox(width:25),
+                  const SizedBox(width: 25),
                   Column(
                     children: [
-                      const Text("☁️Partly Cloudy",
-                      style: TextStyle(fontSize: 17,fontWeight: FontWeight.w700)),
+                      const Text("☁️ Partly Cloudy",
+                          style: TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w700,color: Color.fromARGB(255, 228, 230, 230))),
                       _buildDate()
                     ],
                   )
-                  
-
                 ],
               ),
-              
+
               //_buildTopStats(),
               const SizedBox(height: 20),
+
               /// **3️⃣ Carousel**
-               
+
               CarouselSliderWidget(),
 
-             
               const SizedBox(height: 7),
 
               /// **4️⃣ Scrollable List**
               Expanded(
-                child:
-              Container(
-                decoration:BoxDecoration(
-                  color: const Color.fromRGBO(234, 236, 229, 1),
-                
-                  borderRadius: BorderRadius.circular(15)
-                ),
-                padding: const EdgeInsets.symmetric(vertical:5,horizontal: 5),
-                child: Column(
-                  children: [
-                    const Row(
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: const Color.fromRGBO(234, 236, 229, 1),
+                        borderRadius: BorderRadius.circular(15)),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                    child: Column(
                       children: [
-                        SizedBox(width:7),
-                        Text("Our Agriculture Field", textAlign: TextAlign.left,style: TextStyle(fontWeight: FontWeight.bold),),
-                        SizedBox(width:160),
-                        Text("View Map",textAlign: TextAlign.right, style: TextStyle(fontWeight: FontWeight.w500,color: Color.fromARGB(255, 29, 94, 206))),
-                        SizedBox(width:2),
-
+                        const Row(
+                          children: [
+                            SizedBox(width: 7),
+                            Text(
+                              "Our Agriculture Field",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(width: 160),
+                            Text("View Map",
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromARGB(255, 29, 94, 206))),
+                            SizedBox(width: 2),
+                          ],
+                        ),
+                        Expanded(child: _buildScrollableList()),
                       ],
-                    ),
-                    Expanded(
-                      child: _buildScrollableList()
-                    ),
-                  ],
-                )
+                    )),
               ),
-              
-            ),
-            _bottomNavBar()
-
-              
+              _bottomNavBar()
             ],
           ),
         ],
       ),
 
       /// **5️⃣ Floating Navigation Bar**
-      
-
     );
   }
+
   Widget _buildDate() {
     return Padding(
       padding: const EdgeInsets.all(2),
       child: Text(
         getCurrentDate(), // 🗓️ Fetch and display current date
-        style: const TextStyle(fontSize:10, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 18, 17, 17)),
+        style: const TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 250, 250, 250)),
       ),
     );
   }
@@ -154,24 +165,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         children: [
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _statCard("Moisture", "${moisture.toStringAsFixed(1)}%", Icons.water_drop, const Color.fromARGB(255, 11, 114, 199)),
-              _statCard("Soil pH", soilPh.toStringAsFixed(1), Icons.science, Colors.green),
+              _statCard("Moisture", "${moisture.toStringAsFixed(1)}%",
+                  Icons.water_drop, const Color.fromARGB(255, 11, 114, 199)),
+              _statCard("Soil pH", soilPh.toStringAsFixed(1), Icons.science,
+                  Colors.green),
             ],
           ),
-          const SizedBox(height:20),
+          const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _statCard("Temp", "${temperature.toStringAsFixed(1)}°C", Icons.thermostat, Colors.red),
-              
-               _buildDate(),
-              _statCard("Humidity", "${humidity.toStringAsFixed(1)}%", Icons.cloud, const Color.fromARGB(255, 103, 104, 176)),
+              _statCard("Temp", "${temperature.toStringAsFixed(1)}°C",
+                  Icons.thermostat, Colors.red),
+              _buildDate(),
+              _statCard("Humidity", "${humidity.toStringAsFixed(1)}%",
+                  Icons.cloud, const Color.fromARGB(255, 103, 104, 176)),
             ],
-
           )
         ],
       ),
@@ -184,8 +196,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
       children: [
         Icon(icon, color: color, size: 30),
         const SizedBox(height: 2),
-        Text(title, style: const TextStyle(fontWeight: FontWeight.bold, color: Color.fromARGB(255, 19, 17, 17))),
-        Text(value, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 28, 13, 13))),
+        Text(title,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 19, 17, 17))),
+        Text(value,
+            style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 28, 13, 13))),
       ],
     );
   }
@@ -197,12 +216,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
       itemCount: 30, // Example count
       itemBuilder: (context, index) {
         return Card(
-
           margin: const EdgeInsets.only(bottom: 7),
           child: ListTile(
             minTileHeight: 50,
-            tileColor: const Color.fromARGB(255, 236, 234, 230).withOpacity(0.5),
-            leading:Image.asset('assets/bg.png'),
+            tileColor:
+                const Color.fromARGB(255, 236, 234, 230).withOpacity(0.5),
+            leading: Image.asset('assets/bg.png'),
             title: Text("Day ${index + 1}"),
             subtitle: const Text("Practice Sustainable Farming"),
           ),
@@ -210,41 +229,47 @@ class _DashboardScreenState extends State<DashboardScreen> {
       },
     );
   }
+
   Widget _bottomNavBar() {
-  return Align(
-    alignment: Alignment.bottomCenter,
-    child: Container(
-      margin: const EdgeInsets.only(bottom: 7),
-      padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 19, 18, 18),
-        borderRadius: BorderRadius.circular(30),
-        boxShadow: [
-          BoxShadow(
-            color: const Color.fromARGB(255, 132, 124, 124).withOpacity(0.15),
-            blurRadius: 10,
-            spreadRadius: 3,
-            offset: const Offset(0, 4),
-          ),
-        ],
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 7),
+        padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 19, 18, 18),
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              color: const Color.fromARGB(255, 132, 124, 124).withOpacity(0.15),
+              blurRadius: 10,
+              spreadRadius: 3,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+                icon: const Icon(Icons.home, size: 32, color: Colors.white),
+                onPressed: () {}),
+            IconButton(
+                icon: const Icon(Icons.search, size: 32, color: Colors.white),
+                onPressed: () {}),
+            IconButton(
+                icon: const Icon(Icons.notifications,
+                    size: 32, color: Colors.white),
+                onPressed: () {}),
+            IconButton(
+                icon: const Icon(Icons.person, size: 32, color: Colors.white),
+                onPressed: () {}),
+          ],
+        ),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          IconButton(icon: const Icon(Icons.home, size: 32, color: Colors.white), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.search, size: 32, color: Colors.white), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.notifications, size: 32, color: Colors.white), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.person, size: 32, color: Colors.white), onPressed: () {}),
-        ],
-      ),
-    ),
-  );
-}
-
-
-
-
+    );
+  }
 
   /// **🔄 Function to Update Stats (Simulated)**
   void _updateStats() {
@@ -261,4 +286,3 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return (0.5 + (0.5 * (DateTime.now().millisecondsSinceEpoch % 10) / 10));
   }
 }
-
