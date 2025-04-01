@@ -1,13 +1,20 @@
-import 'package:farm_genius/screens/home_page.dart';
 import 'package:flutter/material.dart';
+import './screens/dashboard/DashboardScreen.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: DashboardScreen()
-
-      )
-    ));
+  runApp(const MyApp());
 }
 
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Farm Genius',
+      theme: ThemeData.dark(),
+      home: const DashboardScreen(),
+    );
+  }
+}

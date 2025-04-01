@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-class CarouselSliderWidget extends StatelessWidget {
-  const CarouselSliderWidget({super.key});
+class CarouselSection extends StatelessWidget {
+  const CarouselSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 125,  // Square boxes
+      height: 125, 
       child: ListView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 9),
         children: [
-          _carouselItem("🕒 8:00 AM","Watering of crops","On-Progress", const Color.fromARGB(255, 148, 212, 95).withOpacity(0.8)),
-          _carouselItem("🕒 10:00 AM","Weed Removal","Not-Started", Colors.white.withOpacity(0.8)),
-          _carouselItem("🕒 12:00","Take a Break & Hydrate","Not-Started",Colors.white.withOpacity(0.8)),
-          _carouselItem("🕒 4:00 PM","Pack harvested crops","Not-Started", Colors.white.withOpacity(0.8)),
-          _carouselItem("🕒 7:00 PM","Feed livestock","Not-Started", Colors.white.withOpacity(0.8))
+          _carouselItem("🕒 8:00 AM","Watering of crops","On-Progress", const Color.fromARGB(255, 148, 212, 95)),
+          _carouselItem("🕒 10:00 AM","Weed Removal","Not-Started", Colors.white),
+          _carouselItem("🕒 12:00","Take a Break & Hydrate","Not-Started",Colors.white),
+          _carouselItem("🕒 4:00 PM","Pack harvested crops","Not-Started", Colors.white),
+          _carouselItem("🕒 7:00 PM","Feed livestock","Not-Started", Colors.white)
         ],
       ),
     );
@@ -44,13 +44,11 @@ class CarouselSliderWidget extends StatelessWidget {
               
             ),
             const SizedBox(height:5),
-            Container(
-              child: Center(
-                  child: Text(
-                    title,
-                    style: const TextStyle(color: Color.fromARGB(255, 29, 28, 28),fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-              )
+            Center(
+                child: Text(
+                  title,
+                  style: const TextStyle(color: Color.fromARGB(255, 29, 28, 28),fontWeight: FontWeight.bold, fontSize: 18),
+                ),
             ),
             Align(
               alignment: Alignment.bottomCenter,
