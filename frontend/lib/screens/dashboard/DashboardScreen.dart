@@ -29,7 +29,7 @@ class DashboardScreen extends StatelessWidget {
               ),
               SizedBox(height: 15),
               Expanded(child: ScrollableList()),
-              BottomNavBar(),
+              //BottomNavBar(),
             ],
           ),
         ],
