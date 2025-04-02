@@ -2,7 +2,7 @@ from pathlib import Path
 import sqlite3
 
 def extract_sql_query(input_string):
-    start_keyword = "SQLQuery: "
+    start_keyword = "SQLQuery:"
     start_index = input_string.find(start_keyword)
     
     if start_index == -1:
