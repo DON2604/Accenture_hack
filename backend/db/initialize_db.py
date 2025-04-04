@@ -49,16 +49,19 @@ conn.close()
 conn = sqlite3.connect("db/memory.db")
 cursor = conn.cursor()
 
-cursor.execute("""
-    CREATE TABLE IF NOT EXISTS conversation_memory (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        role TEXT,  -- 'user' or 'assistant'
-        message TEXT
-    )
-""")
+cursor.execute('''
+        CREATE TABLE IF NOT EXISTS memory (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            agent_name TEXT NOT NULL UNIQUE,
+            crux TEXT NOT NULL,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
 
 conn.commit()
 conn.close()
 
 
 print("Database initialized successfully! ✅")
+
+
